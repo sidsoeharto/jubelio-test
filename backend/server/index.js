@@ -10,11 +10,11 @@ async function createServer () {
     host: '127.0.0.1',
     routes: {
       cors: true,
-      validate: {
-        options: {
-          abortEarly: false
-        }
-      }
+      // validate: {
+      //   options: {
+      //     abortEarly: false
+      //   }
+      // }
     },
   })
 

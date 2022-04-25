@@ -8,12 +8,20 @@ module.exports = async (server) => (
               {
                   name: 'elevenia',
                   axios: {
-                      baseURL: 'http://api.elevenia.co.id/rest',
+                    //   baseURL: "",
                       headers: {
-                          'Content-Type': 'application/xml',
-                          'Accept-Charset': 'utf-8',
-                          'openapikey': '721407f393e84a28593374cc2b347a98'
+                          "Content-Type": "application/xml",
+                          "Accept-Charset": "utf-8",
+                          "openapikey": "721407f393e84a28593374cc2b347a98"
+                      },
+                      transitional: {
+                        silentJSONParsing: false,
+                        forcedJSONParsing: false,
                       }
+                    //   proxy: {
+                    //     host: '127.0.0.1',
+                    //     port: 3001,
+                    //   },
                       // you can use any axios config here. https://github.com/axios/axios#creating-an-instance
                   },
               },

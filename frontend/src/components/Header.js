@@ -4,42 +4,47 @@ import { Button } from '@mui/material';
 import { Add, Autorenew } from '@mui/icons-material';
 
 import PageStore from '../store/PageStore';
+import ProductStore from '../store/ProductStore';
 
 const Header = observer(() => {
   const baseUrl = window.location.origin;
 
   const { openAddModal } = React.useContext(PageStore)
+  const { getProductFromElevenia } = React.useContext(ProductStore)
 
   return (
-    <div className='flex flex-col mb-6'>
-      <img src={baseUrl+"/assets/logo-jubelio.png"} alt="logo jubelio" className='w-64 mx-auto my-3'/>
-      <h1 className='text-center font-semibold text-2xl text-cyan-700 mb-4'>
-        E-Commerce X Elevenia Products
-      </h1>
-      <div className='flex flex-row w-full justify-center'>
-        <Button 
-          size="small" 
-          color="secondary"
-          startIcon={<Add />}
-          variant="contained"
-          onClick={() => {
-            openAddModal()
-          }}
-          sx={{borderRadius: '1rem', padding: '0.25rem 1rem', marginRight: '1rem'}}
-        >
-          Add Product
-        </Button>
-        <Button 
-          size="small" 
-          color="secondary"
-          startIcon={<Autorenew />}
-          variant="contained" 
-          sx={{borderRadius: '1rem', padding: '0.25rem 1rem'}}
-        >
-          Fetch From Elevenia
-        </Button>
+    <nav className='sticky top-0 z-50 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded shadow-lg'>
+      <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <img src={baseUrl+"/assets/logo-jubelio.png"} alt="logo jubelio" className='w-32 my-3'/>
+        <h1 className='text-center font-light text-lg text-cyan-700'>
+          E-Commerce X Elevenia Products
+        </h1>
+        <div className='flex flex-row space-x-8 justify-center'>
+          <Button 
+            size="small" 
+            color="secondary"
+            startIcon={<Add />}
+            variant="contained"
+            onClick={() => {
+              openAddModal()
+            }}
+            sx={{borderRadius: '1rem', padding: '0.25rem 1rem', marginRight: '1rem'}}
+          >
+            Add Product
+          </Button>
+          <Button 
+            size="small" 
+            color="secondary"
+            onClick={() => getProductFromElevenia()}
+            startIcon={<Autorenew />}
+            variant="contained" 
+            sx={{borderRadius: '1rem', padding: '0.25rem 1rem'}}
+          >
+            Fetch From Elevenia
+          </Button>
+        </div>
       </div>
-    </div>
+    </nav>
   )
 })
 

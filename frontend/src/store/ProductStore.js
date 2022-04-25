@@ -1,6 +1,7 @@
 import { makeObservable, observable, autorun, action, runInAction } from "mobx";
 import { createContext } from 'react'
 import API_URL from '../config/axios';
+import axios from 'axios';
 
 class ProductStore {
     constructor () {
@@ -23,6 +24,7 @@ class ProductStore {
     getProduct = async () => {
         const getData = await API_URL.get('/get/product')
         .then((response) => {
+            // console.log(response.data)
             return response.data
         })
         .catch((err) => {
@@ -48,34 +50,50 @@ class ProductStore {
     createProduct = async (payload) => {
         const getData = await API_URL.post('add/product', payload)
         .then((response) => {
-            console.log(response);
+            // console.log(response);
             return response.data
         })
         .catch((err) => {
             return console.log(err);
         });
 
-        return this.product = getData.data;
+        return this.getProduct();
     }
 
-    deleteProduct = async (param, payload) => {
-        const getData = await API_URL.post(`delete/product/${param}`, payload)
+    deleteProduct = async (param) => {
+        const getData = await API_URL.delete(`delete/product/${param}`)
+        .then((response) => {
+            return response.data
+        })
+        .catch((err) => {
+            return console.log(err);
+        });
 
-        return getData.data;
+        return this.getProduct();
     }
 
     updateProduct = async (param, payload) => {
-        const getData = await API_URL.post(`update/product/${param}`, payload)
+        const getData = await API_URL.put(`update/product/${param}`, payload)
+        .then((response) => {
+            return response.data
+        })
+        .catch((err) => {
+            return console.log(err)
+        })
 
-        return getData.data;
+        return this.getProduct;
     }
 
-    getProductFromElevenia = async (param) => {
+    getProductFromElevenia = async () => {
         const action = await API_URL.get(`fetch-product`)
-        const getDataNew = await API_URL.get('/get/product')
-        this.product = getDataNew.data.data
+        .then((response) => {
+            return response.data
+        })
+        .catch((err) => {
+            return console.log(err);
+        });
 
-        return action.data
+        return this.getProduct();
     }
 
     prefetchData = async () => {

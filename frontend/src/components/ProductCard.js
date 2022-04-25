@@ -36,7 +36,7 @@ const ProductCard = observer((props) => {
       <CardMedia
         component="img"
         height="100"
-        image={baseUrl + "/assets/dummy-product.jpg"}
+        image={product.image ??= baseUrl + '/assets/dummy-product.jpg'}
         alt={product.name}
       />
       <CardContent
@@ -73,6 +73,12 @@ const ProductCard = observer((props) => {
           Edit
         </Button>
         <Button 
+          onClick={async () => {
+            const getProd = await getProductDetail(product.id);
+            if (getProd.length > 0) {
+              return await openDeleteModal()
+            }
+          }}
           size="small" 
           color="error"
           startIcon={<DeleteIcon />}
