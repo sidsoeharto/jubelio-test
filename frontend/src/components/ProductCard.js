@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import PageStore from '../store/PageStore';
+import ProductStore from '../store/ProductStore';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -15,6 +16,7 @@ const ProductCard = observer((props) => {
   const [product, setProduct] = React.useState(props.data)
 
   const { openEditModal, openDeleteModal } = React.useContext(PageStore)
+  const { getProductDetail } = React.useContext(ProductStore);
 
   const convertPrice = (price) => {
     if (price < 1) {
@@ -58,7 +60,12 @@ const ProductCard = observer((props) => {
         sx={{padding: '0.75rem 1.25rem', justifyContent: 'end'}}
       >
         <Button 
-          onClick={() => openEditModal}
+          onClick={async () => {
+            const getProd = await getProductDetail(product.id);
+            if (getProd.length > 0) {
+              return await openEditModal()
+            }
+          }}
           size="small" 
           variant="outlined" 
           sx={{borderRadius: '1rem', padding: '0.25rem 1rem'}}

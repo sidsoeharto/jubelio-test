@@ -9,6 +9,7 @@ async function createServer () {
     port: config.port,
     host: '127.0.0.1',
     routes: {
+      cors: true,
       validate: {
         options: {
           abortEarly: false

@@ -34,21 +34,28 @@ class ProductStore {
 
     getProductDetail = async (param) => {
         const getData = await API_URL.get(`get/product/${param}`)
-        this.productDetail = getData.data.data;
+        .then((response) => {
+            return response.data
+        })
+        .catch((err) => {
+            return console.log(err)
+        })
 
+        this.productDetail = getData.data[0];
         return getData.data;
     }
 
-    createProduct = async (param, payload) => {
-        const getData = await API_URL.post('add/product', JSON.stringify(payload))
+    createProduct = async (payload) => {
+        const getData = await API_URL.post('add/product', payload)
         .then((response) => {
+            console.log(response);
             return response.data
         })
         .catch((err) => {
             return console.log(err);
         });
 
-        return getData;
+        return this.product = getData.data;
     }
 
     deleteProduct = async (param, payload) => {

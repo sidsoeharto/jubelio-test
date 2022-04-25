@@ -26,16 +26,17 @@ const AddProduct = observer(() => {
       formData.append('file', value);
     }
 
-    console.log(dataObj);
     return setInputs(dataObj);
   }
 
   const submitData = (payload) => {
-    return console.log(createProduct(payload));
+    createProduct(payload);
+
+    return closeAddModal();
   }
 
   return (
-    <Dialog open={addModal} onClose={closeAddModal}>
+    <Dialog open={addModal} onClose={closeAddModal} maxWidth="lg" fullWidth>
       <DialogTitle>Add Product</DialogTitle>
       <DialogContent className='flex flex-col w-full'>
         <div className='flex flex-col w-full'>
@@ -75,12 +76,12 @@ const AddProduct = observer(() => {
           autoFocus
           margin="dense"
           label="Product Image"
-          type="file"
+          type="text"
           fullWidth
           variant="standard"
           onChange={
             (e) => {
-              handleChange("image", e.target.files[0]);
+              handleChange("image", e.target.value);
             }
           }
           sx={{marginBottom: '0.875rem'}}
@@ -124,8 +125,8 @@ const AddProduct = observer(() => {
           color="success"
           startIcon={<Check />}
           onClick={() => {
-            console.log(inputs)
-            return submitData(inputs)
+            let payload = inputs;
+            submitData(payload);
           }}
           variant="contained" 
           sx={{borderRadius: '1rem', padding: '0.25rem 1rem'}}

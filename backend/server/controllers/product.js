@@ -49,10 +49,34 @@ module.exports = {
     
   },
   getProductById: async (request, h) => {
+    try {
+      console.log('ini id =>', request.params.id);
+      const id = request.params.id;
+      const data = await db.any('SELECT * FROM products WHERE id = ${id}', {
+        id
+      });
 
+      return ApiResponse.ok('Get Product by ID success', data)
+    } catch (err) {
+      return ApiResponse.internalServerError(err, 'Internal server error', err.message)
+    }
   },
   updateProduct: async (request, h) => {
-
+    try {
+      const id = request.params.id;
+      const payload = request.payload;
+      const data = await db.any('UPDATE products SET name = ${name}, sku = ${sku}, image = ${image}, price = ${price}, description = ${description} WHERE id = ${id}', {
+        id: id,
+        name: payload.name,
+        sku: payload.sku,
+        image: payload.image,
+        price: payload.price,
+        description: payload.description
+      });
+      return ApiResponse.ok('Update Product success', data)
+    } catch (err) {
+      return ApiResponse.internalServerError(err, 'Internal server error', err.message)
+    }
   },
   deleteProduct: async(request, h) => {
 
@@ -60,15 +84,19 @@ module.exports = {
   addProduct: async (request, h) => {
     try {
       let payload = request.payload;
-      // payload.image = 'dummy-product.jpg';
+      payload.image = 'dummy-product.jpg';
 
       console.log(payload, 'INI PAYLOAD');
 
       const data = await db.none('INSERT INTO products(name, sku, image, price, description) VALUES(${name}, ${sku}, ${image}, ${price}, ${description})', payload)
 
-      return ApiResponse.created('Create Product success', data)
+      if (data == null) {
+        const result = await db.any('SELECT * FROM products');
+        return ApiResponse.created('Create Product success', result)
+      }
+
     } catch (err) {
-      return ApiResponse.internalServerError(err, 'Internal server error', err.message)
+      return ApiResponse.internalServerError(err.message, err)
     }
   }
 }

@@ -12,6 +12,7 @@ import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductStore from './store/ProductStore';
 import AddProduct from './components/AddProduct';
+import EditProduct from './components/EditProduct';
 
 const App = observer(() => {
   const baseUrl = window.location.origin;
@@ -50,6 +51,7 @@ const App = observer(() => {
         </InfiniteScroll>
       </Container>
       <AddProduct />
+      <EditProduct />
     </div>
   );
 })
