@@ -1,0 +1,37 @@
+{
+  "name": "hapi-api-boilerplate",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "start": "nodemon index.js",
+    "unit-test": "lab -c -r console -o stdout -r lcov -o lcov.info",
+    "test": "npm run lint && npm run unit-test",
+    "migrate": "node-pg-migrate"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "9.1.4",
+    "@hapi/hapi": "20.2.1",
+    "@hapi/joi": "17.1.1",
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
+    "fast-xml-parser": "^4.0.7",
+    "hapi-axios": "^1.0.0",
+    "hapi-pino": "9.1.1",
+    "node-fetch": "^2.6.1",
+    "node-pg-migrate": "^6.2.1",
+    "pg": "^8.7.3",
+    "pg-promise": "^10.11.1",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@hapi/code": "8.0.6",
+    "@hapi/lab": "24.5.1",
+    "blipp": "4.0.2",
+    "codeclimate-test-reporter": "0.5.1",
+    "standard": "16.0.4"
+  }
+}
