@@ -1,7 +1,6 @@
-import { makeObservable, observable, autorun, action, runInAction } from "mobx";
+import { makeObservable, observable, action, runInAction } from "mobx";
 import { createContext } from 'react'
 import API_URL from '../config/axios';
-import axios from 'axios';
 
 class ProductStore {
     constructor () {

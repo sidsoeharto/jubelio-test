@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, {Fragment} from 'react';
+import React from 'react';
 import { observer } from 'mobx-react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useMediaQuery } from 'react-responsive';
@@ -15,14 +15,6 @@ import ProductStore from './store/ProductStore';
 import AddProduct from './components/AddProduct';
 import EditProduct from './components/EditProduct';
 import DeleteAlert from './components/DeleteAlert';
-
-const GridContainer = ({children}) => {
-  return (
-    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {children}
-    </Grid>
-  )
-}
 
 const App = observer(() => {
   const itemsPerPage = 9;

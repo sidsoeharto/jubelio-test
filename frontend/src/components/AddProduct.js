@@ -4,7 +4,7 @@ import ProductStore from "../store/ProductStore";
 import PageStore from "../store/PageStore";
 
 import { Check } from '@mui/icons-material';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 
 const AddProduct = observer(() => {
   const { createProduct } = React.useContext(ProductStore);

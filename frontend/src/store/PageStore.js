@@ -1,4 +1,4 @@
-import { makeObservable, observable, autorun, action } from "mobx";
+import { makeObservable, observable, action } from "mobx";
 import { createContext } from 'react'
 
 class PageStore {
