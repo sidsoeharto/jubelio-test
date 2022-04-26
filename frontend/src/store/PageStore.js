@@ -21,7 +21,6 @@ class PageStore {
     deleteModal = false;
 
     openEditModal = () => {
-      console.log(true);
       return this.editModal = true;
     }
 
@@ -30,7 +29,6 @@ class PageStore {
     }
 
     openAddModal = () => {
-      console.log(true);
       return this.addModal = true;
     }
 

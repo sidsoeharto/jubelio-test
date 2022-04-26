@@ -14,12 +14,12 @@ const Header = observer(() => {
 
   return (
     <nav className='sticky top-0 z-50 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded shadow-lg'>
-      <div class="container flex flex-wrap justify-between items-center mx-auto">
-        <img src={baseUrl+"/assets/logo-jubelio.png"} alt="logo jubelio" className='w-32 my-3'/>
-        <h1 className='text-center font-light text-lg text-cyan-700'>
+      <div className="container flex flex-wrap justify-between items-center mx-auto">
+        <img src={baseUrl+"/assets/logo-jubelio.png"} alt="logo jubelio" className='w-32 mx-auto mb-4 lg:m-0'/>
+        <h1 className='text-center font-light text-lg text-cyan-700 hidden lg:block mx-auto'>
           E-Commerce X Elevenia Products
         </h1>
-        <div className='flex flex-row space-x-8 justify-center'>
+        <div className='flex flex-row lg:space-x-8 justify-center mx-auto lg:m-0'>
           <Button 
             size="small" 
             color="secondary"

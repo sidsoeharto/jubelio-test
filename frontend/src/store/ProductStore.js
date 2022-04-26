@@ -14,12 +14,20 @@ class ProductStore {
           deleteProduct: action,
           createProduct: action,
           getProductFromElevenia: action,
+          editDetailState: action,
         },
         runInAction(this.prefetchData));
     }
     
     product = [];
-    productDetail = [];
+    productDetail = {
+        id: null,
+        name: '',
+        sku: '',
+        price: 0,
+        image: '',
+        description: '',
+    };
 
     getProduct = async () => {
         const getData = await API_URL.get('/get/product')
@@ -31,7 +39,7 @@ class ProductStore {
             return console.log(err);
         })
 
-        return this.product = getData.data;
+        return this.product = getData.data
     }
 
     getProductDetail = async (param) => {
@@ -47,6 +55,13 @@ class ProductStore {
         return getData.data;
     }
 
+    editDetailState = (name, value) => {
+        let dataObj = this.productDetail;
+        dataObj[name] = value;
+
+        return this.productDetail = dataObj;
+    }
+
     createProduct = async (payload) => {
         const getData = await API_URL.post('add/product', payload)
         .then((response) => {
@@ -57,7 +72,7 @@ class ProductStore {
             return console.log(err);
         });
 
-        return this.getProduct();
+        return window.location.reload();
     }
 
     deleteProduct = async (param) => {
@@ -69,7 +84,7 @@ class ProductStore {
             return console.log(err);
         });
 
-        return this.getProduct();
+        return window.location.reload();
     }
 
     updateProduct = async (param, payload) => {
@@ -81,7 +96,7 @@ class ProductStore {
             return console.log(err)
         })
 
-        return this.getProduct;
+        return window.location.reload();
     }
 
     getProductFromElevenia = async () => {
@@ -93,7 +108,7 @@ class ProductStore {
             return console.log(err);
         });
 
-        return this.getProduct();
+        return window.location.reload();
     }
 
     prefetchData = async () => {

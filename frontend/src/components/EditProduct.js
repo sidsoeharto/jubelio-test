@@ -7,28 +7,39 @@ import PageStore from "../store/PageStore";
 import { Check } from '@mui/icons-material';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, TextField } from '@mui/material';
 
+
 const EditProduct = observer(() => {
-  const { productDetail, updateProduct } = React.useContext(ProductStore);
+  const { productDetail, updateProduct, editDetailState } = React.useContext(ProductStore);
   const { editModal, closeEditModal } = React.useContext(PageStore);
-  const [inputs, setInputs] = React.useState({
-    name: null,
-    sku: null,
-    image: null,
-    description: null,
-    price: null,
-  })
+  const dataProd = toJS(productDetail)
 
-  React.useEffect(() => {
-    console.log(toJS(productDetail))
-    setInputs(toJS(productDetail))
-  }, [productDetail])
+  // const [inputs, setInputs] = React.useState({
+  //   name: dataProd.name,
+  //   sku: dataProd.sku,
+  //   image: dataProd.image,
+  //   description: dataProd.description,
+  //   price: dataProd.price,
+  // })
 
-  const handleChange = (name, value) => {
-    let dataObj = inputs;
-    dataObj[name] = value;
+  // React.useEffect(() => {
+  //   const payload = toJS(productDetail)
+  //   const obj = {
+  //     id: payload.id,
+  //     name: payload.name,
+  //     sku: payload.sku,
+  //     image: payload.image,
+  //     description: payload.description,
+  //     price: payload.price
+  //   }
+  //   setInputs(obj)
+  // }, [productDetail])
 
-    return setInputs(dataObj);
-  }
+  // const handleChange = (name, value) => {
+  //   let dataObj = inputs;
+  //   dataObj[name] = value;
+
+  //   return setInputs(dataObj);
+  // }
 
   const submitData = (payload) => {
     updateProduct(productDetail.id, payload);
@@ -49,12 +60,12 @@ const EditProduct = observer(() => {
           id="name"
           label="Name"
           type="text"
-          value={inputs.name}
+          value={dataProd.name}
           fullWidth
           variant="standard"
           onChange={
             (e) => {
-              handleChange("name", e.target.value);
+              editDetailState("name", e.target.value);
             }
           }
           sx={{marginBottom: '0.875rem'}}
@@ -65,12 +76,12 @@ const EditProduct = observer(() => {
           id="sku"
           label="SKU"
           type="text"
-          value={inputs.sku}
+          value={dataProd.sku}
           fullWidth
           variant="standard"
           onChange={
             (e) => {
-              handleChange("sku", e.target.value);
+              editDetailState("sku", e.target.value);
             }
           }
           sx={{marginBottom: '0.875rem'}}
@@ -80,12 +91,12 @@ const EditProduct = observer(() => {
           margin="dense"
           label="Product Image"
           type="text"
-          value={inputs.image}
+          value={dataProd.image}
           fullWidth
           variant="standard"
           onChange={
             (e) => {
-              handleChange("image", e.target.value);
+              editDetailState("image", e.target.value);
             }
           }
           sx={{marginBottom: '0.875rem'}}
@@ -96,12 +107,12 @@ const EditProduct = observer(() => {
           id="price"
           label="Price"
           type="numeric"
-          value={inputs.price}
+          value={dataProd.price}
           fullWidth
           variant="standard"
           onChange={
             (e) => {
-              handleChange("price", e.target.value);
+              editDetailState("price", e.target.value);
             }
           }
           sx={{marginBottom: '0.875rem'}}
@@ -112,13 +123,13 @@ const EditProduct = observer(() => {
           id="description"
           label="Description"
           type="textarea"
-          value={inputs.description}
+          value={dataProd.description}
           rows={3}
           fullWidth
           variant="standard"
           onChange={
             (e) => {
-              handleChange("description", e.target.value);
+              editDetailState("description", e.target.value);
             }
           }
           sx={{marginBottom: '0.875rem'}}
@@ -131,7 +142,7 @@ const EditProduct = observer(() => {
           color="success"
           startIcon={<Check />}
           onClick={() => {
-            let payload = inputs;
+            let payload = dataProd;
             submitData(payload);
           }}
           variant="contained" 
